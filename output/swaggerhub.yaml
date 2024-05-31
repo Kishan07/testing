@@ -1,0 +1,97 @@
+openapi: 3.0.0
+info:
+  title: SwaggerHub resolve export yaml api
+  description: "Description about the API \n"
+  contact:
+    name: rajni
+    url: https://ins.sharepoint.com/sites/ea
+    email: Test@test.com
+  version: 2.0.0
+servers:
+- url: "https://{serverName}/{apiVersion}/{basePath}"
+  description: "The server URL for v2 {info.title}"
+  variables:
+    serverName:
+      description: Name of the server
+      default: dev-hapi-ugw1.humana.com
+      enum:
+      - dev-hapi-ugw1.humana.
+    basePath:
+      description: Base path and folder for the API
+      default: collection
+    apiVersion:
+      description: API version in URL
+      default: v2
+security:
+- OAuth2:
+  - test.*.READ
+paths:
+  /test:
+    post:
+      tags:
+      - name your endpoint
+      summary: Summary of the endpoint
+      description: description of the endpoint
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/test-create-request'
+        required: true
+      responses:
+        "202":
+          description: Response description.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response-block'
+components:
+  schemas:
+    test-create-request:
+      allOf:
+      - $ref: '#/components/schemas/create-request'
+    create-request:
+      properties:
+        name:
+          type: string
+    response-block:
+      properties:
+        arrayAttributeName:
+          type: array
+          description: List of things
+          items:
+            $ref: '#/components/schemas/responseblock_arrayAttributeName'
+    block-with-allof-and-properties:
+      properties:
+        attribute2:
+          type: string
+      allOf:
+      - $ref: '#/components/schemas/test-block'
+    test-block:
+      properties:
+        attribute1:
+          type: number
+          description: Example description with number datatype
+          example: 62
+        dateTimeAttributeTimestamp:
+          type: string
+          description: datetime example
+          format: date-time
+          example: 2022-10-21T17:32:28Z
+    responseblock_arrayAttributeName:
+      properties:
+        resourceId:
+          type: string
+          description: Unique id of the resourceId
+          example: ABC123
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: test
+          tokenUrl: test
+          scopes:
+            read: Grants read access
+            write: Grants write access
+            admin: Grants access to admin operations
