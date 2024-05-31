@@ -1,0 +1,68 @@
+openapi: 3.0.0
+info:
+  title: SwaggerHub resolve export yaml api
+  description: "Description about the API \nemail: 'Test@test.com' \n"
+  version: 2.0.0
+servers:
+- url: /
+paths:
+  /test:
+    post:
+      tags:
+      - your endpoint
+      summary: Summary of the endpoint
+      description: description of the endpoint
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/test-create-request'
+        required: true
+      responses:
+        "202":
+          description: Response description.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response-block'
+components:
+  schemas:
+    test-create-request:
+      allOf:
+      - $ref: '#/components/schemas/create-request'
+    create-request:
+      type: object
+      properties:
+        name:
+          type: string
+    response-block:
+      type: object
+      properties:
+        arrayAttributeName:
+          type: array
+          description: List of things
+          items:
+            allOf:
+            - properties:
+                resourceId:
+                  type: string
+                  description: Unique id of the resourceId
+                  example: ABC123
+            - $ref: '#/components/schemas/block-with-allof-and-properties'
+    block-with-allof-and-properties:
+      properties:
+        attribute2:
+          type: string
+      allOf:
+      - $ref: '#/components/schemas/test-block'
+    test-block:
+      properties:
+        attribute1:
+          type: number
+          description: Example description with number datatype
+          example: 62
+        dateTimeAttributeTimestamp:
+          type: string
+          description: datetime example
+          format: date-time
+          example: 2022-10-21T17:32:28Z
