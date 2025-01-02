@@ -37,7 +37,7 @@
       "post" : {
         "tags" : [ "name your endpoint" ],
         "summary" : "Summary of the endpoint",
-        "description" : "description of the endpoint",
+        "description" : "description of the endpoint of the endpoint",
         "requestBody" : {
           "content" : {
             "application/json" : {
