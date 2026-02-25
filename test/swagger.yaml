@@ -1,0 +1,51 @@
+openapi: 3.0.0
+info:
+  version: 2.1.0
+  title: "SwaggerHub resolve export yaml api"
+  description: |
+    Description about the API 
+    email: 'Test@test.com' 
+  
+paths:
+  '/test':
+    post:
+      summary: Summary of the endpoint
+      description: description of the endpoint
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/test-create-request'
+      responses:
+        '202':
+          description: Response description. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response-block'
+
+components:
+  schemas:
+    test-create-request:
+      allOf:
+        - $ref: '#/components/schemas/create-request'
+    create-request:
+      type: object
+      properties:
+        name:
+          type: string
+    response-block:
+      type: object
+      properties:
+        arrayAttributeName:
+          type: array
+          description: List of things
+          items:
+            allOf:
+              - properties:
+                  resourceId:
+                    type: string
+                    description: Unique id of the resourceId
+                    example: "ABC123"
+              - $ref: 'https://api.swaggerhub.com/domains/SmartBear-CC/test1_yaml/1.0.0#/components/schemas/block-with-allof-and-properties'
